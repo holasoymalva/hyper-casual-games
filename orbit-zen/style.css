@@ -1,0 +1,236 @@
+:root {
+  --app-bg: #111;
+  --watch-bg: #000;
+  --watch-frame: #1b1b1b;
+  --watch-frame-highlight: #333;
+  --neon-blue: #00f3ff;
+  --neon-pink: #ff00ff;
+  --neon-green: #00ff66;
+  --text-white: #fff;
+  --font-main: 'Outfit', sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--app-bg);
+  color: var(--text-white);
+  font-family: var(--font-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.presentation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header {
+  text-align: center;
+  opacity: 0.8;
+}
+
+.header h1 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 2.5rem;
+  letter-spacing: -0.05em;
+  background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header p {
+  margin: 0.5rem 0 0;
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+/* Watch Simulation */
+.watch-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.watch-strap {
+  width: 180px;
+  height: 100px;
+  background-color: #333;
+  border-radius: 20px;
+  position: relative;
+  z-index: 0;
+}
+
+.watch-strap.top {
+  margin-bottom: -40px;
+  background: linear-gradient(to bottom, #222, #111);
+  box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.watch-strap.bottom {
+  margin-top: -40px;
+  background: linear-gradient(to top, #222, #111);
+  box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.watch-body {
+  width: 320px;
+  height: 390px;
+  background: var(--watch-frame);
+  border-radius: 60px;
+  padding: 12px;
+  position: relative;
+  z-index: 1;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.8),
+    inset 0 2px 3px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.watch-screen {
+  width: 100%;
+  height: 100%;
+  background-color: var(--watch-bg);
+  border-radius: 48px;
+  overflow: hidden;
+  position: relative;
+  mask-image: radial-gradient(white, black);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  /* Rounded corners clipping */
+  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.watch-screen.pressed {
+  transform: scale(0.98);
+}
+
+/* Hardware Buttons */
+.digital-crown {
+  position: absolute;
+  right: -16px;
+  top: 80px;
+  width: 12px;
+  height: 48px;
+  background: linear-gradient(to right, #444, #111);
+  border-radius: 4px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.side-button {
+  position: absolute;
+  right: -6px;
+  top: 145px;
+  width: 6px;
+  height: 60px;
+  background: #222;
+  border-radius: 3px;
+}
+
+/* Game Elements */
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ui-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* Let clicks pass through to canvas handler mostly, or handle explicitly */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: opacity 0.3s ease;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+}
+
+.screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.screen.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.logo {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  margin-bottom: 2rem;
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+}
+
+.instruction {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #888;
+  animation: pulse 2s infinite;
+}
+
+.score-display {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+#game-hud {
+  justify-content: flex-start;
+  padding-top: 20px;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+#score {
+  font-size: 3rem;
+  font-weight: 700;
+  opacity: 0.3;
+}
+
+.controls-hint {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

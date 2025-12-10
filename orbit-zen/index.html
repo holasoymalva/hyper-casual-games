@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Orbit Zen - Apple Watch Game Concept</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="presentation-container">
+      <div class="header">
+        <h1>Orbit Zen</h1>
+        <p>A Hyper Casual Experience for Apple Watch</p>
+      </div>
+
+      <div class="watch-container">
+        <div class="watch-strap top"></div>
+        <div class="watch-body">
+          <div class="watch-screen" id="watch-screen">
+            <!-- Game Canvas -->
+            <canvas id="gameCanvas" width="312" height="390"></canvas>
+            
+            <!-- UI Overlay -->
+            <div id="ui-layer" class="ui-layer">
+              <div id="start-screen" class="screen active">
+                <div class="logo">ORBIT<br>ZEN</div>
+                <p class="instruction">Tap to Start</p>
+              </div>
+              <div id="game-over-screen" class="screen hidden">
+                <h2>GAME OVER</h2>
+                <div class="score-display">Score: <span id="final-score">0</span></div>
+                <p class="instruction">Tap to Restart</p>
+              </div>
+              <div id="game-hud" class="screen hidden">
+                <div class="score" id="score">0</div>
+              </div>
+            </div>
+            
+          </div>
+          <div class="digital-crown"></div>
+          <div class="side-button"></div>
+        </div>
+        <div class="watch-strap bottom"></div>
+      </div>
+      
+      <div class="controls-hint">
+        <p>Click or Tap inside the watch screen to reverse orbit direction.</p>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
